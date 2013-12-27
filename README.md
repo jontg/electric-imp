@@ -11,6 +11,8 @@ I have a simple control system for use in controlling my build of the popular [S
 Schwartz back in 1997.  The circuit (will eventually be) shown below, and measures the temperature both in the ice chamber as well as in the carboy itself (via thermowell).  If the ice is cold
 enough and the fermenting wort is warm enough then a fan is activated.  This fan moves air from the ice chamber into the main chamber, cooling the beer down.
 
+The Xively data feed should be available [here](https://xively.com/feeds/134802722).
+
 
 Temp Bot
 ========
