@@ -11,6 +11,8 @@ const MEASUREMENT_FREQUENCY = 10; // seconds
 
 /*=-------------------------------------------= CONFIGURE PINS =--=*/
 
+imp.setpowersave(true);
+
 fan_relay1 <- hardware.pin2;
 fan_relay1.configure(DIGITAL_OUT);
 fan_relay1.write(1);
@@ -95,16 +97,28 @@ function main() {
 
     server.log("Ice Room: " + format("%.01f", ice_temp) + ", Brew: " + format("%.01f", brew_temp) + ", Fan RPM: " + format("%.01f", fan_rpm) + ", " + (isActive ? "ACTIVATING" : "DISABLING") + " fans");
     agent.send("SendToXively", {ice_temp = ice_temp, brew_temp = brew_temp, volt = v_high, fan_rpm = fan_rpm});
-}
 
 /*=--------------------------------------------------= EXECUTE =--=*/
+
+    local t = time();
+    local sleep_for = MEASUREMENT_FREQUENCY - (t % MEASUREMENT_FREQUENCY);
+
+    if (isActive) {
+        imp.wakeup(sleep_for, main);
+    } else {
+        local next_date = date(t + sleep_for);
+        server.sleepuntil(next_date.hour, next_date.min, next_date.sec);
+    }
+}
 
 imp.onidle(function() {
     main();
 
-    local time = time();
-    time = time - time % MEASUREMENT_FREQUENCY + MEASUREMENT_FREQUENCY;
+/** Requires a latch or latched relay to work -,-
+ *  local time = time();
+ *  time = time - time % MEASUREMENT_FREQUENCY + MEASUREMENT_FREQUENCY;
 
-    local next_date = date(time);
-    server.sleepuntil(next_date.hour, next_date.min, next_date.sec);
+ *  local next_date = date(time);
+ *  server.sleepuntil(next_date.hour, next_date.min, next_date.sec);
+ */
 });
