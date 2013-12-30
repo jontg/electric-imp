@@ -1,13 +1,13 @@
 device.on("SendToXively", function(data) {
     tempChannel <- Xively.Channel("Temperature");
-    tempChannel.Set(data.tempOutTwo);
+    tempChannel.Set(data.brew_temp);
     iceTempChannel <- Xively.Channel("IceChamberTemperature");
-    iceTempChannel.Set(data.tempOut);
+    iceTempChannel.Set(data.ice_room_temp);
     voltChannel <- Xively.Channel("Voltage");
     voltChannel.Set(data.volt);
-    fanVoltChannel <- Xively.Channel("FanVoltage");
-    fanVoltChannel.Set(data.fanVolt);
+    fanRPMChannel <- Xively.Channel("FanRPM");
+    fanRPMChannel.Set(data.fan_rpm);
     
-    feed <- Xively.Feed(Xively.FEED_ID, [tempChannel, iceTempChannel, voltChannel, fanVoltChannel]);
+    feed <- Xively.Feed(Xively.FEED_ID, [tempChannel, iceTempChannel, voltChannel, fanRPMChannel]);
     Xively.Put(feed);
 });
