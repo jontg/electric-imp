@@ -93,5 +93,10 @@ function main() {
 
 imp.onidle(function() {
     main();
-    server.sleepfor(60 - (time() % 60));
+
+    local time = time();
+    time = time - time % MEASUREMENT_FREQUENCY + MEASUREMENT_FREQUENCY;
+
+    local next_date = date(time);
+    server.sleepuntil(next_date.hour, next_date.min, next_date.sec);
 });
