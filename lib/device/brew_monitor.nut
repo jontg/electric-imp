@@ -7,7 +7,7 @@ const b_therm = 3988;
 const t0_therm = 298.15;
 
 const RPM_DURATION = 3.0;
-const MEASUREMENT_FREQUENCY = 10; // seconds
+const MEASUREMENT_FREQUENCY = 60; // seconds
 
 /*=-------------------------------------------= CONFIGURE PINS =--=*/
 
