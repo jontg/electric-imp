@@ -71,7 +71,7 @@ function main() {
 
 /*=--------------------------------------------------= CONVERT =--=*/
 
-    local fan_rpm = fan_measurement * 60.0 / RPM_DURATION;
+    local fan_rpm = 1800.0 - fan_measurement * 60.0 / RPM_DURATION;
 
     // scale the ADC reading to a voltage by dividing by the full-scale value and multiplying by the supply voltage
     local v_brew = v_high * brew_measurement / 65535.0;
