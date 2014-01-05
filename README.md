@@ -18,3 +18,5 @@ Temp Bot
 ========
 
 Temp bot is a battery-powered temperature sensor that measures data every 15 minutes and sends it to my Xively stream.
+
+[![Analytics](https://ga-beacon.appspot.com/UA-46850189-1/electric-imp/README.md)](https://github.com/igrigorik/ga-beacon)
